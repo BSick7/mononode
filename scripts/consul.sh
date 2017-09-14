@@ -15,6 +15,7 @@ echo "[${me}]: installing consul binaries"
 chmod 755 /opt/bin/consul
 chmod 755 /opt/consul/bind.sh
 chmod 755 /opt/consul/data-dir.sh
+chmod 755 /opt/consul/online.sh
 
 echo "[${me}]: preparing consul data directory"
 mkdir -p /var/lib/consul/

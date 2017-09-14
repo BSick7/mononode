@@ -1,0 +1,4 @@
+#!/bin/sh
+if ! grep GOMAXPROCS /etc/environment; then
+  echo "GOMAXPROCS=`nproc`" >> /etc/environment
+fi

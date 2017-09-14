@@ -1,0 +1,16 @@
+[Unit]
+Description=Ensures consul is online
+Requires=consul.service
+After=consul.service
+
+[Service]
+RemainAfterExit=yes
+Restart=on-failure
+TimeoutStartSec=3m
+
+# Consul process can be started but not yet servicing DNS requests, so wait
+ExecStartPre=/opt/consul/online.sh 120 consul.service.consul
+ExecStart=/usr/bin/echo "consul online"
+
+[Install]
+WantedBy=multi-user.target

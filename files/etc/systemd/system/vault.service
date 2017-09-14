@@ -1,0 +1,23 @@
+[Unit]
+Description=vault server
+
+Wants=consul.service consul-online.service
+Requires=gomaxprocs.service
+After=gomaxprocs.service consul-online.service
+
+[Service]
+LimitMEMLOCK=infinity
+LimitNOFILE=infinity
+LimitNPROC=infinity
+
+ExecStartPre=/opt/vault/bind.sh
+ExecStart=/opt/bin/vault server -config /etc/vault/
+
+# Vault requires running as root to lock memory
+User=root
+
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 #cloud-config
 
+hostname: mononode-01
 coreos:
   update:
     reboot-strategy: off

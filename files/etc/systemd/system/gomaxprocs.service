@@ -1,0 +1,10 @@
+[Unit]
+Description=Sets GOMAXPROCS to the number of CPU cores
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/bin/gomaxprocs
+
+[Install]
+WantedBy=multi-user.target

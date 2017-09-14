@@ -5,13 +5,14 @@
 set -e
 set -o pipefail
 
-me=consul-bind
+me=vault-bind
 
 private_ip=$(/opt/bin/private-ip)
 
-echo "[${me}] configuring consul with private_ip = ${private_ip}"
-cat > /etc/consul/bind.json <<EOF
-{
-  "bind_addr": "${private_ip}"
+echo "[${me}] configuring vault to use consul with private_ip = ${private_ip}"
+cat > /etc/vault/consul.hcl <<EOF
+backend "consul" {
+  path = "vault"
+  address = "${private_ip}:8500"
 }
 EOF

@@ -6,7 +6,8 @@
     "source_version": "1465.7.0",
     "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
     "version": "0.1.{{timestamp}}",
-    "consul_binary_url": "https://releases.hashicorp.com/consul/0.9.3/consul_0.9.3_linux_amd64.zip"
+    "consul_binary_url": "https://releases.hashicorp.com/consul/0.9.3/consul_0.9.3_linux_amd64.zip",
+    "vault_binary_url": "https://releases.hashicorp.com/vault/0.8.2/vault_0.8.2_linux_amd64.zip"
   },
   "builders": [
     {
@@ -32,12 +33,14 @@
       "type": "shell",
       "execute_command": "echo 'core' | {{ .Vars }} sudo -E -S /bin/bash '{{ .Path }}'",
       "environment_vars": [
-        "CONSUL_BINARY_URL={{user `consul_binary_url`}}"
+        "CONSUL_BINARY_URL={{user `consul_binary_url`}}",
+        "VAULT_BINARY_URL={{user `vault_binary_url`}}"
       ],
       "scripts": [
         "scripts/cloudinit.sh",
         "scripts/init.sh",
-        "scripts/consul.sh"
+        "scripts/consul.sh",
+        "scripts/vault.sh"
       ]
     }
   ],
