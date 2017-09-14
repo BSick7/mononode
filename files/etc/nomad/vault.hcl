@@ -1,0 +1,3 @@
+vault {
+  enabled = true
+}

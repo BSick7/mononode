@@ -1,0 +1,23 @@
+[Unit]
+Description=nomad server
+
+Requires=vault-unseal.service
+After=vault-unseal.service
+
+[Service]
+LimitMEMLOCK=infinity
+LimitNOFILE=infinity
+LimitNPROC=infinity
+
+EnvironmentFile=/etc/environment
+EnvironmentFile=/etc/vault-access.env
+
+ExecStartPre=/usr/bin/mkdir -p /var/lib/nomad
+ExecStartPre=/opt/nomad/bind.sh
+ExecStart=/opt/bin/nomad agent -config /etc/nomad/
+
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
