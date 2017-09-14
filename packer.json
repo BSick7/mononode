@@ -1,25 +1,25 @@
 {
   "variables": {
+    "org": "brad_sickles",
     "vm_name": "monocloud",
     "source": "brad_sickles/coreos",
     "source_version": "1465.7.0",
     "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
-    "version": "0.1.{{timestamp}}"
+    "version": "0.1.{{timestamp}}",
+    "consul_binary_url": "https://releases.hashicorp.com/consul/0.9.3/consul_0.9.3_linux_amd64.zip"
   },
   "builders": [
     {
       "vm_name": "{{user `vm_name`}}",
       "type": "virtualbox-ovf",
       "source_path": "./boxes/coreos/virtualbox/box.ovf",
-
       "ssh_port": 22,
-      "ssh_username": "core",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
       "ssh_private_key_file": "./keys/vagrant",
       "ssh_wait_timeout": "5m",
-
       "output_directory": "packer-{{user `vm_name`}}-virtualbox",
-
-      "shutdown_command": "sudo shutdown"
+      "shutdown_command": "sudo shutdown -h now"
     }
   ],
   "provisioners": [
@@ -31,8 +31,13 @@
     {
       "type": "shell",
       "execute_command": "echo 'core' | {{ .Vars }} sudo -E -S /bin/bash '{{ .Path }}'",
+      "environment_vars": [
+        "CONSUL_BINARY_URL={{user `consul_binary_url`}}"
+      ],
       "scripts": [
-        "scripts/init.sh"
+        "scripts/cloudinit.sh",
+        "scripts/init.sh",
+        "scripts/consul.sh"
       ]
     }
   ],
@@ -44,7 +49,7 @@
       },
       {
         "type": "vagrant-cloud",
-        "box_tag": "brad_sickles/monocloud",
+        "box_tag": "{{user `org`}}/{{user `vm_name`}}",
         "access_token": "{{user `cloud_token`}}",
         "version": "{{user `version`}}"
       }

@@ -1,9 +1,10 @@
 # Cache objects
 packer_cache/
-boxes/
 
-# For built boxes
+# For builds
 *.box
+boxes/
+packer-monocloud-virtualbox/
 
 # Webstorm
 .idea/

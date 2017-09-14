@@ -1,0 +1,9 @@
+#cloud-config
+
+coreos:
+  update:
+    reboot-strategy: off
+users:
+  - name: "consul"
+    system: true
+    no-create-home: true

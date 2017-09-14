@@ -18,9 +18,6 @@ rsync -rv /tmp/files/ /
 echo "[${me}]: setting binary permissions"
 chmod 755 /opt/bin/*
 
-echo "[${me}]: reset ownership on /home/core/.bashrc"
-chown core:core /home/core/.bashrc
-
 if [ -d /tmp/files/etc/systemd/system/ ]; then
     echo "[${me}]: enabling systemd units"
     pushd /tmp/files/etc/systemd/system/
