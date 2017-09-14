@@ -1,0 +1,53 @@
+{
+  "variables": {
+    "vm_name": "monocloud",
+    "source": "brad_sickles/coreos",
+    "source_version": "1465.7.0",
+    "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
+    "version": "0.1.{{timestamp}}"
+  },
+  "builders": [
+    {
+      "vm_name": "{{user `vm_name`}}",
+      "type": "virtualbox-ovf",
+      "source_path": "./boxes/coreos/virtualbox/box.ovf",
+
+      "ssh_port": 22,
+      "ssh_username": "core",
+      "ssh_private_key_file": "./keys/vagrant",
+      "ssh_wait_timeout": "5m",
+
+      "output_directory": "packer-{{user `vm_name`}}-virtualbox",
+
+      "shutdown_command": "sudo shutdown"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'core' | {{ .Vars }} sudo -E -S /bin/bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/init.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "output": "builds/{{user `vm_name`}}.{{.Provider}}.box"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "brad_sickles/monocloud",
+        "access_token": "{{user `cloud_token`}}",
+        "version": "{{user `version`}}"
+      }
+    ]
+  ]
+}
