@@ -2,8 +2,6 @@
 
 me=unseal
 
-export VAULT_TOKEN=$(cat /etc/vault/root-token)
-
 sealed=$(curl "${VAULT_ADDR}/v1/sys/seal-status" | jq '.sealed' | sed "s/\"//g")
 if [[ "${sealed}" == "false" ]]; then
     echo "[${me}]: vault is already unsealed"

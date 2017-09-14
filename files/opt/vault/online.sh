@@ -9,6 +9,8 @@ me=vault-online
 
 max_duration="$1"
 
+export VAULT_ADDR="http://${COREOS_PRIVATE_IPV4}:8200"
+
 start=$(/bin/date '+%s')
 end=$((start + max_duration))
 

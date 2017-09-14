@@ -5,7 +5,7 @@ Requires=vault.service
 After=vault.service
 
 [Service]
-Environment=VAULT_ADDR=http://127.0.0.1:8200
+EnvironmentFile=/etc/environment
 
 Type=oneshot
 ExecStartPre=/opt/vault/online.sh 60

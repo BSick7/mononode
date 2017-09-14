@@ -5,7 +5,8 @@ Requires=vault-init.service
 After=vault-init.service
 
 [Service]
-Environment=VAULT_ADDR=http://127.0.0.1:8200
+EnvironmentFile=/etc/environment
+EnvironmentFile=/etc/vault-access.env
 
 Type=oneshot
 ExecStart=/opt/vault/unseal.sh

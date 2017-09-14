@@ -2,6 +2,8 @@
 
 me=init
 
+export VAULT_ADDR="http://${COREOS_PRIVATE_IPV4}:8200"
+
 /opt/bin/vault init -check > /dev/null
 status="$?"
 if [[ "${status}" == "0" ]]; then

@@ -1,22 +1,11 @@
-# /etc/skel/.bashrc
-#
-# This file is sourced by all *interactive* bash shells on startup,
-# including some apparently interactive shells such as scp and rcp
-# that can't tolerate any output.  So make sure this doesn't display
-# anything or bad things will happen !
+source /usr/share/skel/.bashrc
+source /etc/environment
 
-
-# Test for an interactive shell.  There is no need to set anything
-# past this point for scp and rcp, and it's important to refrain from
-# outputting anything in those cases.
-if [[ $- != *i* ]] ; then
-        # Shell is non-interactive.  Be done now!
-        return
-fi
-
-
-# Put your fun stuff here.
 export TERM=vt100
+export CONSUL_HTTP_ADDR=${COREOS_PRIVATE_IPV4}:8500
+export NOMAD_ADDR=http://${COREOS_PRIVATE_IPV4}:4646
 if [ -e /etc/vault-access.env ]; then
     source /etc/vault-access.env
+    export VAULT_ADDR
+    export VAULT_TOKEN
 fi
