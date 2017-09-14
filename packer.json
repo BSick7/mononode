@@ -42,7 +42,8 @@
         "scripts/cloudinit.sh",
         "scripts/init.sh",
         "scripts/consul.sh",
-        "scripts/vault.sh"
+        "scripts/vault.sh",
+        "scripts/nomad.sh"
       ]
     }
   ],
