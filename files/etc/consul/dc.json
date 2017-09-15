@@ -1,4 +1,4 @@
 {
-  "datacenter": "monocloud-1",
+  "datacenter": "mono-cloud-1",
   "recursors": ["8.8.8.8"]
 }

@@ -1,7 +1,7 @@
-# monocloud
+# mononode
 
-This is a packer build for a vagrant box running a monocloud.
-A monocloud is a single box running an entire cluster of consul, vault, and nomad.
+This is a packer build for a vagrant box running a mononode.
+A mononode is a single box running an entire cluster of consul, vault, and nomad.
 
 In the future, nomad worker boxes will be able to join the cluster.
 

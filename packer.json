@@ -1,7 +1,7 @@
 {
   "variables": {
     "org": "brad_sickles",
-    "vm_name": "monocloud",
+    "vm_name": "mononode",
     "source": "brad_sickles/coreos",
     "source_version": "1465.7.0",
     "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
