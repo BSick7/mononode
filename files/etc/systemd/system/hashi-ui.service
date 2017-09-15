@@ -1,0 +1,20 @@
+[Unit]
+Description=Hashi UI
+
+Wants=consul-online.service nomad.service
+After=consul-online.service nomad.service
+
+[Service]
+EnvironmentFile=/etc/environment
+
+ExecStart=/opt/bin/hashi-ui \
+  --consul-enable \
+  --consul-address=${COREOS_PRIVATE_IPV4}:8500 \
+  --nomad-enable \
+  --nomad-address=http://${COREOS_PRIVATE_IPV4}:4646
+
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -8,7 +8,8 @@
     "version": "0.1.{{timestamp}}",
     "consul_binary_url": "https://releases.hashicorp.com/consul/0.9.3/consul_0.9.3_linux_amd64.zip",
     "vault_binary_url": "https://releases.hashicorp.com/vault/0.8.2/vault_0.8.2_linux_amd64.zip",
-    "nomad_binary_url": "https://releases.hashicorp.com/nomad/0.6.3/nomad_0.6.3_linux_amd64.zip"
+    "nomad_binary_url": "https://releases.hashicorp.com/nomad/0.6.3/nomad_0.6.3_linux_amd64.zip",
+    "hashi_ui_binary_url": "https://github.com/jippi/hashi-ui/releases/download/v0.18.0/hashi-ui-linux-amd64"
   },
   "builders": [
     {
@@ -36,14 +37,16 @@
       "environment_vars": [
         "CONSUL_BINARY_URL={{user `consul_binary_url`}}",
         "VAULT_BINARY_URL={{user `vault_binary_url`}}",
-        "NOMAD_BINARY_URL={{user `nomad_binary_url`}}"
+        "NOMAD_BINARY_URL={{user `nomad_binary_url`}}",
+        "HASHI_UI_BINARY_URL={{user `hashi_ui_binary_url`}}"
       ],
       "scripts": [
         "scripts/cloudinit.sh",
         "scripts/init.sh",
         "scripts/consul.sh",
         "scripts/vault.sh",
-        "scripts/nomad.sh"
+        "scripts/nomad.sh",
+        "scripts/hashi-ui.sh"
       ]
     }
   ],
