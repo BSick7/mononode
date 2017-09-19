@@ -1,0 +1,15 @@
+[Unit]
+Description=Fabio HTTP router
+Requires=consul-online.service
+After=consul-online.service
+
+[Service]
+Restart=always
+RestartSec=30
+
+ExecStartPre=/opt/fabio/ensure-consul-config.sh %i
+ExecStart=/opt/bin/fabio \
+  --cfg==/etc/fabio/%i.properties
+
+[Install]
+WantedBy=multi-user.target
