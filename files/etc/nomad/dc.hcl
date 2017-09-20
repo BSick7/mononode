@@ -1,2 +1,2 @@
 region     = "mono-cloud"
-datacenter = "mono-cloud-1"
+datacenter = "mono-cloud-a"
